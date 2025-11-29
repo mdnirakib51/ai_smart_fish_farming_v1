@@ -7,7 +7,7 @@ import '../../../global/widget/confirm_alert_dialog.dart';
 import '../../../global/widget/global_image_loader.dart';
 import '../../../global/widget/global_sized_box.dart';
 import '../../../global/widget/global_text.dart';
-import 'controller/student_dashboard_bottom_controller.dart';
+import 'controller/dashboard_bottom_controller.dart';
 import 'model/student_nav_item_model.dart';
 
 class DashboardBottomNavigationBar extends StatefulWidget {
@@ -21,7 +21,7 @@ class _DashboardBottomNavigationBarState extends State<DashboardBottomNavigation
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<StudentDashboardBottomController>(builder: (dashboardBottomController){
+    return GetBuilder<DashboardBottomController>(builder: (dashboardBottomController){
       return WillPopScope(
         onWillPop: () async {
           showDialog(

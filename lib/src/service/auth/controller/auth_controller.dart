@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:ai_smart_fish_farming/src/service/auth/model/auth_model.dart';
 import '../../../domain/local/preferences/storage_controller.dart';
-import '../../../features/student_panel/student_dashboard_bottom_navigation_bar/student_dashboard_bottom_navigation_bar.dart';
+import '../../../features/student_panel/dashboard_bottom_navigation_bar/dashboard_bottom_navigation_bar.dart';
 import '../model/holyday_model.dart';
 import '../model/mediums_model.dart';
 import '../model/sessions_model.dart';

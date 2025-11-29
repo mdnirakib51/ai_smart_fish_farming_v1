@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:ai_smart_fish_farming/src/global/constants/input_decoration.dart';
 import 'package:ai_smart_fish_farming/src/service/auth/view/components/auth_background_com.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../features/student_panel/student_dashboard_bottom_navigation_bar/student_dashboard_bottom_navigation_bar.dart';
+import '../../../features/student_panel/dashboard_bottom_navigation_bar/dashboard_bottom_navigation_bar.dart';
 import '../../../global/constants/colors_resources.dart';
 import '../../../global/widget/global_bottom_widget.dart';
 import '../../../global/widget/global_progress_hub.dart';

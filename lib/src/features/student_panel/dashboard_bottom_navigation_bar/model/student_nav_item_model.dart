@@ -17,11 +17,11 @@ List<StudentNavItemModel> studnetNavItemList = [
     img: Images.homeIc,
   ),
   StudentNavItemModel(
-    title: "Fee",
+    title: "Camera",
     img: Images.feeIc,
   ),
   StudentNavItemModel(
-    title: "Payment Ledger",
+    title: "Notification",
     img: Images.paymentLedgerIc,
   ),
   StudentNavItemModel(
