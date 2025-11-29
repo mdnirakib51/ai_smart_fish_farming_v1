@@ -15,8 +15,8 @@ import '../model/student_profile_view_model.dart';
 import '../model/student_subject_list_model.dart';
 import 'student_home_repo.dart';
 
-class StudentHomePageController extends GetxController implements GetxService {
-  static StudentHomePageController get current => Get.find();
+class HomePageController extends GetxController implements GetxService {
+  static HomePageController get current => Get.find();
   final StudentHomeRepository repository = StudentHomeRepository();
   bool _isLoading = false;
 

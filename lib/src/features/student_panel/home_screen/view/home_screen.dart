@@ -12,21 +12,16 @@ import '../../../../global/widget/global_sized_box.dart';
 import '../../../../global/widget/global_text.dart';
 import '../../../../service/auth/controller/auth_controller.dart';
 import '../../pond/pond_a_screen.dart';
-import '../../student_attendance_screen/student_attendance_screen.dart';
-import '../../student_class_routine/student_class_routine_screen.dart';
-import '../../student_drawer/view/student_drawer_screen.dart';
-import '../../student_notification_screen/student_notification_screen.dart';
-import '../../student_subject_screen/student_subject_screen.dart';
 import '../controller/student_home_controller.dart';
 
-class StudentHomeScreen extends StatefulWidget {
-  const StudentHomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<StudentHomeScreen> createState() => _StudentHomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _StudentHomeScreenState extends State<StudentHomeScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> drawerKey = GlobalKey<ScaffoldState>();
 
   List<GlobalMenuModel>? menuItem;
@@ -34,7 +29,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
   @override
   void initState() {
     super.initState();
-    final studentHomeController = StudentHomePageController.current;
+    final studentHomeController = HomePageController.current;
     SchedulerBinding.instance.addPostFrameCallback((_) {
       studentHomeController.getStudentsProfileView();
       studentHomeController.getStudentsNotice();
@@ -111,11 +106,11 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<StudentHomePageController>(builder: (homePageController) {
+    return GetBuilder<HomePageController>(builder: (homePageController) {
       return GetBuilder<AuthController>(builder: (authController) {
         return Scaffold(
           key: drawerKey,
-          drawer: StudentCustomDrawer(),
+          // drawer: StudentCustomDrawer(),
           backgroundColor: Color(0xFFF5F5F5),
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(60),
@@ -209,7 +204,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
                           ),
                           child: GestureDetector(
                             onTap: () {
-                              Get.to(() => StudentNotificationScreen());
+                              // Get.to(() => StudentNotificationScreen());
                             },
                             child: Icon(
                               Icons.settings,
@@ -247,14 +242,14 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
                 boxShadow: [
                   BoxShadow(
                     color: ColorRes.appColor.withValues(alpha: 0.4),
-                    blurRadius: 20,
-                    offset: Offset(0, 8),
+                    blurRadius: 10,
+                    offset: Offset(0, 4),
                     spreadRadius: 2,
                   ),
                   BoxShadow(
                     color: Colors.black.withValues(alpha: 0.1),
-                    blurRadius: 10,
-                    offset: Offset(0, 4),
+                    blurRadius: 5,
+                    offset: Offset(0, 2),
                   ),
                 ],
               ),
@@ -294,10 +289,10 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
                             Get.to(() => const PondAScreen());
                             break;
                           case 'pond_b':
-                            Get.to(() => const StudentSubjectScreen());
+                            // Get.to(() => const StudentSubjectScreen());
                             break;
                           case 'pond_c':
-                            Get.to(() => const StudentClassRoutineScreen());
+                            // Get.to(() => const StudentClassRoutineScreen());
                             break;
                           default:
                             showCustomSnackBar(

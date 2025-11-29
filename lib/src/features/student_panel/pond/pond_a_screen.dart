@@ -2,11 +2,10 @@
 import 'package:ai_smart_fish_farming/src/global/widget/global_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../../../global/constants/colors_resources.dart';
 import '../../../global/utils/show_toast.dart';
 import '../../../global/widget/global_text.dart';
-import '../student_home_screen/view/widget/temperaturn_graph_painter.dart';
+import '../home_screen/view/widget/temperaturn_graph_painter.dart';
 import 'pond_a_details_screen.dart';
 
 class PondAScreen extends StatefulWidget {
