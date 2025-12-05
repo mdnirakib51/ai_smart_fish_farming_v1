@@ -12,6 +12,7 @@ import '../../../../global/widget/global_sized_box.dart';
 import '../../../../global/widget/global_text.dart';
 import '../../../../service/auth/controller/auth_controller.dart';
 import '../../pond/pond_a_screen.dart';
+import '../../pond/pond_create_screen.dart';
 import '../controller/student_home_controller.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -277,26 +278,77 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.to(()=> PondCreateScreen());
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          ColorRes.appColor,
+                          ColorRes.appColor.withValues(alpha: 0.85),
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: ColorRes.appColor.withValues(alpha: 0.3),
+                          blurRadius: 15,
+                          offset: Offset(0, 6),
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withValues(alpha: 0.2),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Icon(
+                            Icons.add_rounded,
+                            color: Colors.white,
+                            size: 22,
+                          ),
+                        ),
+                        SizedBox(width: 12),
+                        GlobalText(
+                          str: "Add Pond",
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
                 // Pond Cards
-                ...List.generate(
-                  menuItem?.length ?? 0,
-                      (index) => Padding(
-                    padding: EdgeInsets.only(bottom: 16),
-                    child: GestureDetector(
-                      onTap: () async {
-                        switch (menuItem?[index].slug ?? "") {
-                          case 'pond_a':
-                            Get.to(() => const PondAScreen());
-                            break;
-                          case 'pond_b':
-                            // Get.to(() => const StudentSubjectScreen());
-                            break;
-                          case 'pond_c':
-                            // Get.to(() => const StudentClassRoutineScreen());
-                            break;
-                          default:
-                            showCustomSnackBar(
-                                "The Menu is currently under development. Please use another menu");
+                sizedBoxH(20),
+                ...List.generate(menuItem?.length ?? 0, (index) => Padding(
+                  padding: EdgeInsets.only(bottom: 16),
+                  child: GestureDetector(
+                    onTap: () async {
+                      switch (menuItem?[index].slug ?? "") {
+                        case 'pond_a':
+                          Get.to(() => const PondAScreen());
+                          break;
+                        case 'pond_b':
+                          // Get.to(() => const StudentSubjectScreen());
+                          break;
+                        case 'pond_c':
+                          // Get.to(() => const StudentClassRoutineScreen());
+                          break;
+                        default:
+                          showCustomSnackBar("The Menu is currently under development. Please use another menu");
                         }
                       },
                       child: _buildPondCard(
