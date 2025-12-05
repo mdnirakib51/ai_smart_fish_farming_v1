@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,11 +16,10 @@ class DashboardBottomNavigationBar extends StatefulWidget {
   State<DashboardBottomNavigationBar> createState() => _DashboardBottomNavigationBarState();
 }
 
-class _DashboardBottomNavigationBarState extends State<DashboardBottomNavigationBar> with TickerProviderStateMixin {
-
+class _DashboardBottomNavigationBarState extends State<DashboardBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<DashboardBottomController>(builder: (dashboardBottomController){
+    return GetBuilder<DashboardBottomController>(builder: (dashboardBottomController) {
       return WillPopScope(
         onWillPop: () async {
           showDialog(
@@ -48,68 +46,116 @@ class _DashboardBottomNavigationBarState extends State<DashboardBottomNavigation
             children: [
               dashboardBottomController.dashBoardBottomScreen.elementAt(dashboardBottomController.selectedIndex),
               Positioned(
-                bottom: 20,
-                left: 20,
-                right: 20,
+                bottom: 0,
+                left: 0,
+                right: 0,
                 child: Container(
                   width: size(context).width,
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                  padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
                   decoration: BoxDecoration(
-                      color: ColorRes.white,
-                      borderRadius: const BorderRadius.all(Radius.circular(24)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withValues(alpha: 0.2),
-                          offset: const Offset(0, 4),
-                          blurRadius: 6,
-                          spreadRadius: 1,
-                        ),
-                      ]
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xFF1A2428),
+                        Color(0xFF151C20),
+                      ],
+                    ),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(24),
+                      topRight: Radius.circular(24)
+                    ),
+                    border: Border.all(
+                      color: Color(0xFF2A3438),
+                      width: 1,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.3),
+                        offset: const Offset(0, 8),
+                        blurRadius: 20,
+                        spreadRadius: 2,
+                      ),
+                      BoxShadow(
+                        color: ColorRes.appColor.withValues(alpha: 0.1),
+                        offset: const Offset(0, 4),
+                        blurRadius: 15,
+                        spreadRadius: 0,
+                      ),
+                    ],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: List.generate(studnetNavItemList.length, (index) =>
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: (){
-                              dashboardBottomController.onItemTapped(index);
-                            },
-                            child: Container(
-                              color: Colors.transparent,
-                              padding: const EdgeInsets.symmetric(vertical: 2),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  GlobalImageLoader(
-                                    imagePath: studnetNavItemList[index].img,
-                                    color: dashboardBottomController.selectedIndex == index ? ColorRes.appColor : ColorRes.grey,
-                                    height: 25,
-                                    width: 25,
+                    children: List.generate(
+                      studnetNavItemList.length,
+                          (index) => Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            dashboardBottomController.onItemTapped(index);
+                          },
+                          child: Container(
+                            color: Colors.transparent,
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                // Icon Container
+                                Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    gradient: dashboardBottomController.selectedIndex == index
+                                        ? LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [
+                                        ColorRes.appColor,
+                                        ColorRes.appColor.withValues(alpha: 0.8),
+                                      ],
+                                    )
+                                        : null,
+                                    borderRadius: BorderRadius.circular(12),
+                                    boxShadow: dashboardBottomController.selectedIndex == index
+                                        ? [
+                                      BoxShadow(
+                                        color: ColorRes.appColor.withValues(alpha: 0.3),
+                                        blurRadius: 10,
+                                        offset: Offset(0, 4),
+                                        spreadRadius: 0,
+                                      ),
+                                    ]
+                                        : null,
                                   ),
-                                  sizedBoxH(5),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: dashboardBottomController.selectedIndex == index ? ColorRes.appColor : Colors.transparent,
-                                    ),
-                                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                                    child: GlobalText(
-                                      str: studnetNavItemList[index].title,
-                                      fontSize: 9,
-                                      color: dashboardBottomController.selectedIndex == index ? ColorRes.white : ColorRes.grey,
-                                      fontWeight: FontWeight.bold,
-                                      textAlign: TextAlign.center,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  )
-                                ],
-                              ),
+                                  child: GlobalImageLoader(
+                                    imagePath: studnetNavItemList[index].img,
+                                    color: dashboardBottomController.selectedIndex == index
+                                        ? ColorRes.white
+                                        : Colors.white.withValues(alpha: 0.4),
+                                    height: 18,
+                                    width: 18,
+                                  ),
+                                ),
+                                sizedBoxH(6),
+                                // Label Text
+                                GlobalText(
+                                  str: studnetNavItemList[index].title,
+                                  fontSize: 10,
+                                  color: dashboardBottomController.selectedIndex == index
+                                      ? ColorRes.white
+                                      : Colors.white.withValues(alpha: 0.5),
+                                  fontWeight: dashboardBottomController.selectedIndex == index
+                                      ? FontWeight.w600
+                                      : FontWeight.w500,
+                                  textAlign: TextAlign.center,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
                             ),
                           ),
-                        )
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -119,165 +165,5 @@ class _DashboardBottomNavigationBarState extends State<DashboardBottomNavigation
         ),
       );
     });
-
   }
 }
-
-// late AnimationController _animationController;
-// late Animation<double> _animation;
-//
-// @override
-// void initState() {
-//   super.initState();
-//   _animationController = AnimationController(
-//     duration: const Duration(milliseconds: 300),
-//     vsync: this,
-//   );
-//   _animation = Tween<double>(begin: 0, end: 1).animate(
-//     CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
-//   );
-// }
-//
-// @override
-// void dispose() {
-//   _animationController.dispose();
-//   super.dispose();
-// }
-
-// return GetBuilder<DashboardBottomController>(builder: (dashboardBottomController) {
-//   return Scaffold(
-//     resizeToAvoidBottomInset: false,
-//     body: Stack(
-//       children: [
-//         dashboardBottomController.dashBoardBottomScreen.elementAt(dashboardBottomController.selectedIndex),
-//         Positioned(
-//           bottom: 0,
-//           left: 0,
-//           right: 0,
-//           child: SizedBox(
-//             height: 90,
-//             child: Stack(
-//               children: [
-//                 // Main navigation bar
-//                 Positioned(
-//                   left: 0,
-//                   right: 0,
-//                   bottom: 0,
-//                   child: Container(
-//                     height: 70,
-//                     margin: const EdgeInsets.only(top: 10),
-//                     decoration: BoxDecoration(
-//                       color: Colors.white,
-//                       borderRadius: const BorderRadius.only(
-//                         topLeft: Radius.circular(25),
-//                         topRight: Radius.circular(25),
-//                       ),
-//                       boxShadow: [
-//                         BoxShadow(
-//                           color: Colors.black.withAlpha((0.1 * 255).toInt()), // Updated
-//                           offset: const Offset(0, -2),
-//                           blurRadius: 10,
-//                           spreadRadius: 0,
-//                         )
-//                       ],
-//                     ),
-//                     child: Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                       children: List.generate(navItemList.length, (index) {
-//                         bool isSelected = dashboardBottomController.selectedIndex == index;
-//                         return Expanded(
-//                           child: GestureDetector(
-//                             onTap: () {
-//                               dashboardBottomController.onItemTapped(index);
-//                               if (isSelected) {
-//                                 _animationController.forward().then((_) {
-//                                   _animationController.reverse();
-//                                 });
-//                               }
-//                             },
-//                             child: SizedBox(
-//                               height: 60,
-//                               child: Column(
-//                                 mainAxisAlignment: MainAxisAlignment.center,
-//                                 children: [
-//                                   if (!isSelected) ...[
-//                                     GlobalImageLoader(
-//                                       imagePath: navItemList[index].img,
-//                                       color: ColorRes.grey.withAlpha((0.6 * 255).toInt()), // Updated
-//                                       height: 22,
-//                                       width: 22,
-//                                     ),
-//                                     sizedBoxH(4),
-//                                     GlobalText(
-//                                       str: navItemList[index].title,
-//                                       fontSize: 10,
-//                                       color: ColorRes.grey.withAlpha((0.6 * 255).toInt()), // Updated
-//                                       fontWeight: FontWeight.w400,
-//                                     ),
-//                                   ],
-//                                   if (isSelected) ...[
-//                                     sizedBoxH(25),
-//                                     GlobalText(
-//                                       str: navItemList[index].title,
-//                                       fontSize: 11,
-//                                       color: ColorRes.appColor,
-//                                       fontWeight: FontWeight.w600,
-//                                     ),
-//                                   ]
-//                                 ],
-//                               ),
-//                             ),
-//                           ),
-//                         );
-//                       }),
-//                     ),
-//                   ),
-//                 ),
-//                 // Floating selected item
-//                 AnimatedPositioned(
-//                   duration: const Duration(milliseconds: 300),
-//                   curve: Curves.easeInOut,
-//                   left: (MediaQuery.of(context).size.width / navItemList.length) * dashboardBottomController.selectedIndex +
-//                       (MediaQuery.of(context).size.width / navItemList.length - 50) / 2,
-//                   top: 0,
-//                   child: AnimatedBuilder(
-//                     animation: _animation,
-//                     builder: (context, child) {
-//                       return Transform.scale(
-//                         scale: 1.0 + (_animation.value * 0.1),
-//                         child: Container(
-//                           width: 50,
-//                           height: 50,
-//                           decoration: BoxDecoration(
-//                             color: ColorRes.appColor,
-//                             shape: BoxShape.circle,
-//                             boxShadow: [
-//                               BoxShadow(
-//                                 color: ColorRes.appColor.withAlpha((0.3 * 255).toInt()), // Updated
-//                                 offset: const Offset(0, 4),
-//                                 blurRadius: 15,
-//                                 spreadRadius: 0,
-//                               )
-//                             ],
-//                           ),
-//                           child: Center(
-//                             child: GlobalImageLoader(
-//                               imagePath: navItemList[dashboardBottomController.selectedIndex].img,
-//                               color: Colors.white,
-//                               height: 24,
-//                               width: 24,
-//                             ),
-//                           ),
-//                         ),
-//                       );
-//                     },
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//       ],
-//     ),
-//   );
-// });

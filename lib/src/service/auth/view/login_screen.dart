@@ -173,6 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           GlobalButtonWidget(
                               str: 'SIGN IN',
                               height: 45,
+                              buttomColor: ColorRes.appButtonColor,
                               onTap: () async {
                                 Get.offAll(() => DashboardBottomNavigationBar());
                                 // authController.reqLogIn(
